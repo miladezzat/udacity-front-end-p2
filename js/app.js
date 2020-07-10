@@ -1,80 +1,28 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
 
-/**
- * Define Global Variables
- * 
-*/
+const moveToSection = (e) => 
+    document.getElementById(`${e.target.textContent}`).scrollIntoView();
 
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
 const createNav = () => {
     let items = ['Home', 'About', 'Popular', 'Contact'];
     let fragment = new DocumentFragment();
     let navContainer = document.getElementById('navbar__list');
     items.forEach(function (item) {
         let li = document.createElement('li');
-        let a = document.createElement('a');
-        a.setAttribute("class", "menu__link");
-        a.setAttribute("href", `#${item}`)
-        a.innerHTML = item
-        li.appendChild(a);
+        let span = document.createElement('span');
+        span.setAttribute("class", "menu__link");    
+        span.addEventListener('click', moveToSection)
+        span.innerHTML = item
+        li.appendChild(span);
         fragment.appendChild(li)
     })
     navContainer.appendChild(fragment)
 }
 
-createNav()
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- *
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
 
 const addHeader = () => {
     let header = document.createElement('header');
-    header.setAttribute("class", "main__hero");
-    // header.setAttribute("id", "Home")
+    header.setAttribute("class", "main__hero");    
     let h1 = document.createElement("h1");
     h1.textContent = "Landing Page";
     header.appendChild(h1);
@@ -116,7 +64,7 @@ const addSections = () => {
     let main = document.getElementById("content");
     for (let index = 0; index < sections.length; index++) {
         let el = sections[index];
-        
+
         let section = document.createElement("section");
         section.setAttribute("id", el.id);
 
@@ -143,5 +91,6 @@ const addSections = () => {
     main.appendChild(mainFrament);
 }
 
+createNav();
 addHeader();
 addSections()
