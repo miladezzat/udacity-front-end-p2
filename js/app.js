@@ -2,12 +2,13 @@
 const moveToSection = (e) => {
     let prevId = location.href.split("#")[1];
     let element = document.querySelectorAll(`a[href='#${prevId}']`)[0];
-    console.log(element);
-    if (element) {        
-        element.classList.remove("active-link");
-        console.log(element);
+    if(element === undefined){
+        element = document.querySelector(`a`);
+        element.classList.add("active-link");
     }
-
+    if (element) {        
+        element.classList.remove("active-link");        
+    }
     document.getElementById(`${e.target.textContent}`).scrollIntoView();
     e.target.setAttribute("href", `#${e.target.textContent}`);
     e.target.classList.add("active-link");
@@ -108,4 +109,19 @@ const addSections = () => {
 
 createNav();
 addHeader();
-addSections()
+addSections();
+
+window.addEventListener('load', (event) => {
+    let prevId = location.href.split("#")[1];
+    let element = document.querySelectorAll(`a[href='#${prevId}']`)[0];
+
+    if(element === undefined){
+        element = document.querySelector(`a`);
+        element.classList.add("active-link");
+    } else{
+        element.classList.add("active-link");
+    }
+    
+    
+});
+
