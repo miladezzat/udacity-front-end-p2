@@ -138,10 +138,11 @@ function checkView () {
         );
     };
 
-    const features = document.querySelector('content');
+    const features = document.querySelector('#content');    
+    
     window.addEventListener('scroll', function (event) {
         if (isInViewport(features)) {
-            let featView = document.querySelector('section');
+            let featView = document.querySelector('About');
             featView.classList.add("mySection");
         }
     }, false);
