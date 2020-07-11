@@ -125,3 +125,26 @@ window.addEventListener('load', (event) => {
     
 });
 
+
+/* Determining if element is in viewport */
+function checkView () {
+    let isInViewport = function (elem) {
+        let bounding = elem.getBoundingClientRect();
+        return (
+            bounding.top >= 0 &&
+            bounding.left >= 0 &&
+            bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    };
+
+    const features = document.querySelector('content');
+    window.addEventListener('scroll', function (event) {
+        if (isInViewport(features)) {
+            let featView = document.querySelector('section');
+            featView.classList.add("mySection");
+        }
+    }, false);
+}
+
+checkView();
