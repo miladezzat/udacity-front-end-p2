@@ -1,6 +1,20 @@
 
-const moveToSection = (e) => 
+const moveToSection = (e) => {
+    let prevId = location.href.split("#")[1];
+    let element = document.querySelectorAll(`a[href='#${prevId}']`)[0];
+    console.log(element);
+    if (element) {        
+        element.classList.remove("active-link");
+        console.log(element);
+    }
+
     document.getElementById(`${e.target.textContent}`).scrollIntoView();
+    e.target.setAttribute("href", `#${e.target.textContent}`);
+    e.target.classList.add("active-link");
+    document.getElementById(`${e.target.textContent}`)
+        .setAttribute("class", "your-active-class");
+}
+
 
 
 const createNav = () => {
@@ -9,11 +23,12 @@ const createNav = () => {
     let navContainer = document.getElementById('navbar__list');
     items.forEach(function (item) {
         let li = document.createElement('li');
-        let span = document.createElement('span');
-        span.setAttribute("class", "menu__link");    
-        span.addEventListener('click', moveToSection)
-        span.innerHTML = item
-        li.appendChild(span);
+        let a = document.createElement('a');
+        a.setAttribute("href", "#");
+        a.setAttribute("class", "menu__link");
+        a.addEventListener('click', moveToSection)
+        a.innerHTML = item
+        li.appendChild(a);
         fragment.appendChild(li)
     })
     navContainer.appendChild(fragment)
@@ -22,7 +37,7 @@ const createNav = () => {
 
 const addHeader = () => {
     let header = document.createElement('header');
-    header.setAttribute("class", "main__hero");    
+    header.setAttribute("class", "main__hero");
     let h1 = document.createElement("h1");
     h1.textContent = "Landing Page";
     header.appendChild(h1);
